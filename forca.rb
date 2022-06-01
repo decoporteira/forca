@@ -5,9 +5,11 @@ def joga(nome)
   erros = 0
   chutes = []
   pontos_ate_agora = 0
-  palavra_certa = ["_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ "]
+  # neu código
+  # palavra_certa = ["_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ ", "_ "]
   while erros < 5
-    chute = pede_um_chute_valido(chutes, erros)
+    mascara = palavra_mascarada(chutes, palavra_secreta)
+    chute = pede_um_chute_valido(chutes, erros, mascara)
     chutes << chute
     chutou_uma_unica_letra = chute.size == 1
 
@@ -18,7 +20,7 @@ def joga(nome)
         erros += 1
       else
         avisa_letra_encontrada(total_encontrado)
-        encaixa_letra(chute, palavra_secreta, palavra_certa)
+        #encaixa_letra(chute, palavra_secreta, palavra_certa)
       end
     else
       acertou = chute == palavra_secreta
@@ -36,19 +38,32 @@ def joga(nome)
   avisa_pontos(pontos_ate_agora)
 end
 
-def encaixa_letra(chute, palavra_secreta, palavra_certa)
-  f = 0
-  palavra_secreta.each_char do |n|
-    if chute == n
-      palavra_certa[f] = chute
+def palavra_mascarada(chutes, palavra_secreta)
+  mascara = ""
+  for letra in palavra_secreta.chars
+    if chutes.include? letra
+      mascara += letra
+    else
+      mascara += "-"
     end
-    f = f + 1
   end
-  puts palavra_certa.join(" ")
+  mascara
 end
 
-def pede_um_chute_valido(chutes, erros)
-  cabecalho_de_tentativas(chutes, erros)
+##### Meu código ######
+# def encaixa_letra(chute, palavra_secreta, palavra_certa)
+#   f = 0
+#   palavra_secreta.each_char do |n|
+#     if chute == n
+#       palavra_certa[f] = chute
+#     end
+#     f = f + 1
+#   end
+#   puts palavra_certa.join(" ")
+# end
+
+def pede_um_chute_valido(chutes, erros, mascara)
+  cabecalho_de_tentativas(chutes, erros, mascara)
   loop do
     chute = pede_um_chute
     if chutes.include? chute

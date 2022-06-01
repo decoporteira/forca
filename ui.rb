@@ -1,7 +1,7 @@
 def da_boas_vindas
   puts "Bem vido ao jogo de forca"
   puts "Qual seu nome?"
-  nome = gets.strip 
+  nome = gets.strip
   puts "Vamos começar o jogo, #{nome}"
   nome
 end
@@ -50,8 +50,9 @@ def avisa_pontos(pontos_ate_agora)
   puts "Você ganhou #{pontos_ate_agora} pontos."
 end
 
-def cabecalho_de_tentativas(chutes, erros)
+def cabecalho_de_tentativas(chutes, erros, mascara)
   puts "\n\n\n\n"
+  puts "Palavra secreta: #{mascara}"
   puts "Erros até agora: #{erros}"
   puts "Chutes até agora: #{chutes}"
 end
